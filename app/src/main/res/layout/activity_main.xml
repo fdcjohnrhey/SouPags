@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".controller.MainActivity">
+
+    <EditText
+        android:id="@+id/searchFood"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:ems="10"
+        android:layout_marginHorizontal="10dp"
+        android:inputType="textPersonName"
+        android:layout_marginTop="44dp"
+        android:textSize="16sp"
+        android:hint="Search"
+        android:drawableLeft="@drawable/ic_baseline_search_24"/>
+
+
+    <TextView
+        android:id="@+id/topPickHeader"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/headerText"
+        android:gravity="center_vertical"
+        android:text="Top Picks" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTopPicks"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_height="152dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/menuHeader"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/headerText"
+        android:gravity="center_vertical"
+        android:text="Our Menu" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/menuRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

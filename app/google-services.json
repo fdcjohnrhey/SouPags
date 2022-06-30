@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "850248791045",
+    "firebase_url": "https://soupags-80b8d-default-rtdb.firebaseio.com",
+    "project_id": "soupags-80b8d",
+    "storage_bucket": "soupags-80b8d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:850248791045:android:24f8fdf462c3a6ed1a586c",
+        "android_client_info": {
+          "package_name": "com.example.soupags"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "850248791045-ijack79vro32duq4mt4oa5ump9nrcbqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAelc30-RZ3Kyom1uex5qdvFSS2SraAZuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "850248791045-ijack79vro32duq4mt4oa5ump9nrcbqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

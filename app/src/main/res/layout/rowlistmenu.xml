@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/foodCardLayout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_margin="16dp"
+    android:layout_height="120dp">
+
+    <ImageView
+        android:id="@+id/foodImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="198dp"
+        android:layout_height="93dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/foodName"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/foodDesc"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textSize="15sp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/foodPrice"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:text="TextView" />
+    </LinearLayout>
+</LinearLayout>

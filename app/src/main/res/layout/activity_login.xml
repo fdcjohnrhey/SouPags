@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".controller.LoginActivity"
+    android:background="@color/grayColor">
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="280dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sopagslogo" />
+
+
+    <TextView
+        android:id="@+id/txtloginerror"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"/>
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/inputext_cutstom"
+        android:ems="10"
+        android:hint="juandelacruz@fourty.com"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/inputext_cutstom"
+        android:ems="10"
+        android:hint="*********"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtrememberme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Remember me"
+            android:textColor="@color/teal_700"
+            android:textFontWeight="1" />
+
+        <TextView
+            android:id="@+id/txtforgot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="Forgot Password?"
+            android:textColor="@color/purple_200"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnlogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Login"
+        android:textColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtnoaccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="Don't have an account?"
+            android:textColor="@color/teal_700"
+            android:textFontWeight="1" />
+
+        <TextView
+            android:id="@+id/linkregister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="Register now"
+            android:textColor="@color/purple_200"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
