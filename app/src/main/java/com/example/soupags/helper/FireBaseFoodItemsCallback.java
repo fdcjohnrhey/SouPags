@@ -5,6 +5,6 @@ import com.example.soupags.model.TopPicks;
 
 import java.util.ArrayList;
 
-public interface FireBaseFoodCallback {
+public interface FireBaseFoodItemsCallback {
     void onCallback(ArrayList arrayList);
 }

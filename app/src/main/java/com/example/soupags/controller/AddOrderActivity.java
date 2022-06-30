@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.ArrayMap;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.soupags.R;
+import com.example.soupags.helper.FireBaseAddFoodCallback;
+import com.example.soupags.helper.FireBaseFoodInfoCallback;
 import com.example.soupags.helper.FireBaseHelper;
 import com.example.soupags.helper.FireBaseMenuItemsCallback;
 import com.example.soupags.model.Cart;
@@ -28,6 +31,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AddOrderActivity extends AppCompatActivity {
     private Button addOrder;
@@ -63,61 +69,52 @@ public class AddOrderActivity extends AppCompatActivity {
         foodId = intent.getIntExtra("food_id", 0);
 
         if(fromTopPick == null) {
-            databaseReference = FirebaseDatabase.getInstance().getReference(Food.class.getSimpleName());
-            databaseReference.addValueEventListener(new ValueEventListener() {
+            FireBaseHelper.getFoodItemInfo(new FireBaseFoodInfoCallback() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        for (DataSnapshot d : snapshot.getChildren()) {
-                            if (Integer.parseInt(d.getKey().toString()) == foodId) {
-                                imgId = Integer.parseInt(d.child("foodImgId").getValue().toString());
-                                addOrderImg.setImageResource(Integer.parseInt(d.child("foodImgId").getValue().toString()));
-                                foodDesc.setText(d.child("foodDesc").getValue().toString());
-                                foodPrice.setText(d.child("foodPrice").getValue().toString());
-                                foodName.setText(d.child("foodName").getValue().toString());
-                            }
+                public void onCallback(JSONObject jsonObject) {
+                    if(jsonObject.length() != 0){
+                        try {
+                            jsonObject.getString("imgId");
+
+                            imgId = Integer.parseInt(jsonObject.getString("imgId"));
+                            addOrderImg.setImageResource(imgId);
+                            foodDesc.setText(jsonObject.getString("foodDesc"));
+                            foodPrice.setText(jsonObject.getString("foodPrice"));
+                            foodName.setText(jsonObject.getString("foodName"));
+
+
+                            setTitle(jsonObject.getString("foodName"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-
-                    } else {
+                    }else{
                         Toast.makeText(AddOrderActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            }, foodId, Food.class.getSimpleName());
         }else{
-            databaseReference = FirebaseDatabase.getInstance().getReference(TopPicks.class.getSimpleName());
-            databaseReference.addValueEventListener(new ValueEventListener() {
+
+            FireBaseHelper.getFoodItemInfo(new FireBaseFoodInfoCallback() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        for (DataSnapshot d : snapshot.getChildren()) {
-                            if (Integer.parseInt(d.getKey().toString()) == foodId) {
-                                imgId = Integer.parseInt(d.child("foodImgId").getValue().toString());
-                                addOrderImg.setImageResource(Integer.parseInt(d.child("foodImgId").getValue().toString()));
-                                foodDesc.setText(d.child("foodDesc").getValue().toString());
-                                foodPrice.setText(d.child("foodPrice").getValue().toString());
-                                foodName.setText(d.child("foodName").getValue().toString());
-                            }
+                public void onCallback(JSONObject jsonObject) {
+                    if(jsonObject.length() != 0){
+                        try {
+                            jsonObject.getString("imgId");
+
+                            imgId = Integer.parseInt(jsonObject.getString("imgId"));
+                            addOrderImg.setImageResource(imgId);
+                            foodDesc.setText(jsonObject.getString("foodDesc"));
+                            foodPrice.setText(jsonObject.getString("foodPrice"));
+                            foodName.setText(jsonObject.getString("foodName"));
+                            setTitle(jsonObject.getString("foodName"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-
-                    } else {
+                    }else{
                         Toast.makeText(AddOrderActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            }, foodId, TopPicks.class.getSimpleName());
 
         }
 
@@ -125,30 +122,18 @@ public class AddOrderActivity extends AppCompatActivity {
         addOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference = FirebaseDatabase.getInstance().getReference(Cart.class.getSimpleName());
 
-                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                FireBaseHelper.addItem(new FireBaseAddFoodCallback() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String cartId = databaseReference.child(userId).push().getKey();
-                        databaseReference.child(userId).child(cartId).setValue(new Cart(
-                                foodName.getText().toString(),
-                                foodPrice.getText().toString(),
-                                imgId,
-                                cartId
-                        ));
-
-
-                        Intent intent = new Intent(AddOrderActivity.this, MainActivity.class);
-                        startActivity(intent);
-
+                    public void onCallback(String message) {
+                        if(message == ""){
+                            Intent intent = new Intent(AddOrderActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }else{
+                            Toast.makeText(AddOrderActivity.this, "Failed to add order. ", Toast.LENGTH_SHORT).show();
+                        }
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Toast.makeText(AddOrderActivity.this, "Failed to add order. " + error, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                }, userId, foodName.getText().toString(), foodPrice.getText().toString(), imgId);
             }
         });
     }
@@ -214,7 +199,6 @@ public class AddOrderActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         setupBadge();
         super.onBackPressed();
     }

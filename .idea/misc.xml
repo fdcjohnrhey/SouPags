@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/badge.xml" value="0.1555" />
+        <entry key="app/src/main/res/drawable-v24/inputext_cutstom.xml" value="0.229" />
+        <entry key="app/src/main/res/drawable/cornerradius.xml" value="0.229" />
+        <entry key="app/src/main/res/layout/activity_account.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/activity_add_order.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_checkout.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.37604166666666666" />
@@ -11,9 +14,14 @@
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/navcounter.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/rowlistcart.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/rowlistmenu.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/rowlistorder.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/layout/rowlistorderheader.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout/rowlistorderitems.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/rowlistorders.xml" value="0.25" />
         <entry key="app/src/main/res/layout/rowtoppicks.xml" value="0.37604166666666666" />
+        <entry key="app/src/main/res/menu/account.xml" value="0.335" />
         <entry key="app/src/main/res/menu/cart.xml" value="0.37604166666666666" />
       </map>
     </option>

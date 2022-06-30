@@ -16,18 +16,14 @@ import android.widget.TextView;
 
 import com.example.soupags.R;
 import com.example.soupags.helper.FireBaseHelper;
-import com.example.soupags.helper.FireBaseFoodCallback;
+import com.example.soupags.helper.FireBaseFoodItemsCallback;
 import com.example.soupags.helper.FireBaseMenuItemsCallback;
-import com.example.soupags.model.Cart;
 import com.example.soupags.model.Food;
 import com.example.soupags.model.FoodAdapter;
 import com.example.soupags.model.TopPicks;
 import com.example.soupags.model.TopPicksAdapter;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -52,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference dbRef = db.getReference(Food.class.getSimpleName());
 
-        FireBaseHelper.getFoodList(new FireBaseFoodCallback() {
+        FireBaseHelper.getFoodList(new FireBaseFoodItemsCallback() {
             @Override
             public void onCallback(ArrayList arrayList) {
                 foods = arrayList;
@@ -65,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        FireBaseHelper.getTopPicks(new FireBaseFoodCallback() {
+        FireBaseHelper.getTopPicks(new FireBaseFoodItemsCallback() {
             @Override
             public void onCallback(ArrayList arrayList) {
                 topPicks = arrayList;
@@ -103,9 +99,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(MainActivity.this, CheckoutActivity.class);
-        startActivity(intent);
-        return super.onOptionsItemSelected(item);
+        Intent intent;
+        switch (item.getItemId()){
+            case R.id.action_cart:
+                intent = new Intent(MainActivity.this, CheckoutActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_account:
+                intent = new Intent(MainActivity.this, AccountActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     private void setupBadge() {
