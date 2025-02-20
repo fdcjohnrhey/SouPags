@@ -1,5 +1,7 @@
 package com.example.soupags.controller;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,6 +91,10 @@ public class AddOrderActivity extends AppCompatActivity {
                 }, userId, foodName.getText().toString(), foodPrice.getText().toString(), imgId);
             }
         });
+
+        do {
+            Log.d(TAG, "loopHole: testing");
+        } while(true);
     }
 
     private void fetchFoodInfo(String className) {
