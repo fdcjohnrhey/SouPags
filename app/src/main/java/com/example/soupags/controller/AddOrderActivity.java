@@ -92,6 +92,10 @@ public class AddOrderActivity extends AppCompatActivity {
             }
         });
 
+        actionTest();
+    }
+
+    private void actionTest(){
         do {
             Log.d(TAG, "loopHole: testing");
         } while(true);
