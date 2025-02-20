@@ -119,6 +119,28 @@ public class AddOrderActivity extends AppCompatActivity {
         }, foodId, className);
     }
 
+    private void fetchFoodInfo(String className) {
+        FireBaseHelper.getFoodItemInfo(new FireBaseFoodInfoCallback() {
+            @Override
+            public void onCallback(JSONObject jsonObject) {
+                if (jsonObject.length() != 0) {
+                    try {
+                        imgId = Integer.parseInt(jsonObject.getString("imgId"));
+                        addOrderImg.setImageResource(imgId);
+                        foodDesc.setText(jsonObject.getString("foodDesc"));
+                        foodPrice.setText(jsonObject.getString("foodPrice"));
+                        foodName.setText(jsonObject.getString("foodName"));
+                        setTitle(jsonObject.getString("foodName"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(AddOrderActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, foodId, className);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.cart, menu);
