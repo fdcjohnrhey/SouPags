@@ -1,5 +1,7 @@
 package com.example.soupags.controller;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.ArrayMap;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,55 +71,7 @@ public class AddOrderActivity extends AppCompatActivity {
         fromTopPick = intent.getStringExtra("from_top_pick");
         foodId = intent.getIntExtra("food_id", 0);
 
-        if(fromTopPick == null) {
-            FireBaseHelper.getFoodItemInfo(new FireBaseFoodInfoCallback() {
-                @Override
-                public void onCallback(JSONObject jsonObject) {
-                    if(jsonObject.length() != 0){
-                        try {
-                            jsonObject.getString("imgId");
-
-                            imgId = Integer.parseInt(jsonObject.getString("imgId"));
-                            addOrderImg.setImageResource(imgId);
-                            foodDesc.setText(jsonObject.getString("foodDesc"));
-                            foodPrice.setText(jsonObject.getString("foodPrice"));
-                            foodName.setText(jsonObject.getString("foodName"));
-
-
-                            setTitle(jsonObject.getString("foodName"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else{
-                        Toast.makeText(AddOrderActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }, foodId, Food.class.getSimpleName());
-        }else{
-
-            FireBaseHelper.getFoodItemInfo(new FireBaseFoodInfoCallback() {
-                @Override
-                public void onCallback(JSONObject jsonObject) {
-                    if(jsonObject.length() != 0){
-                        try {
-                            jsonObject.getString("imgId");
-
-                            imgId = Integer.parseInt(jsonObject.getString("imgId"));
-                            addOrderImg.setImageResource(imgId);
-                            foodDesc.setText(jsonObject.getString("foodDesc"));
-                            foodPrice.setText(jsonObject.getString("foodPrice"));
-                            foodName.setText(jsonObject.getString("foodName"));
-                            setTitle(jsonObject.getString("foodName"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }else{
-                        Toast.makeText(AddOrderActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }, foodId, TopPicks.class.getSimpleName());
-
-        }
+        fetchFoodInfo(fromTopPick == null ? Food.class.getSimpleName() : TopPicks.class.getSimpleName());
 
         addOrder = findViewById(R.id.addOrderButton);
         addOrder.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +91,36 @@ public class AddOrderActivity extends AppCompatActivity {
                 }, userId, foodName.getText().toString(), foodPrice.getText().toString(), imgId);
             }
         });
+
+        actionTest();
+    }
+
+    private void actionTest(){
+        do {
+            Log.d(TAG, "loopHole: testing");
+        } while(true);
+    }
+
+    private void fetchFoodInfo(String className) {
+        FireBaseHelper.getFoodItemInfo(new FireBaseFoodInfoCallback() {
+            @Override
+            public void onCallback(JSONObject jsonObject) {
+                if (jsonObject.length() != 0) {
+                    try {
+                        imgId = Integer.parseInt(jsonObject.getString("imgId"));
+                        addOrderImg.setImageResource(imgId);
+                        foodDesc.setText(jsonObject.getString("foodDesc"));
+                        foodPrice.setText(jsonObject.getString("foodPrice"));
+                        foodName.setText(jsonObject.getString("foodName"));
+                        setTitle(jsonObject.getString("foodName"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(AddOrderActivity.this, "No Data Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, foodId, className);
     }
 
     @Override
